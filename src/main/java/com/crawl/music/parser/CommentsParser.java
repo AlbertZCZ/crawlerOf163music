@@ -7,6 +7,7 @@ import com.crawl.music.entity.Page;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.PathNotFoundException;
 
+import java.awt.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +35,10 @@ public class CommentsParser implements ListPageParser {
         //https://music.163.com/weapi/v1/resource/comments/R_SO_4_{id}?csrf_token=
         String url = page.getUrl();
         String songId = url.substring(url.indexOf("R_SO_4_") + "R_SO_4_".length(),url.indexOf("?"));
-        Integer hotLength = JsonPath.read(page.getHtml(),"$.hotComments.length()");
+
         Integer commentsLength = JsonPath.read(page.getHtml(),"$.comments.length()");
-        if (hotLength > 0) {
+        try {
+            Integer hotLength =  JsonPath.read(page.getHtml(),"$.hotComments.length()");
             for (int hot = 0;hot < hotLength;hot ++) {
                 Comment comment = new Comment();
                 String commetJsonPath = "$.hotComments[" + hot + "]";
@@ -54,6 +56,8 @@ public class CommentsParser implements ListPageParser {
                 comment.setSongId(songId);
                 list.add(comment);
             }
+        }catch (Exception e) {
+
         }
         for (int i = 0;i < commentsLength;i ++) {
             Comment comment = new Comment();
