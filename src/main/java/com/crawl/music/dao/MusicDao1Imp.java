@@ -21,21 +21,21 @@ public class MusicDao1Imp implements MusicDao1 {
         try {
             //加载properties文件
             p.load(MusicDao1Imp.class.getResourceAsStream("/config.properties"));
-            rs = cn.getMetaData().getTables(null, null, "url", null);
+            rs = cn.getMetaData().getTables(null, null, "comment", null);
             Statement st = cn.createStatement();
-            //不存在url表
-            if(!rs.next()){
-                //创建url表
-                st.execute(p.getProperty("createUrlTable"));
-                logger.info("url表创建成功");
+            //不存在comment表
+            if(!rs.next()) {
+                //创建comment表
+                st.execute(p.getProperty("createCommentTable"));
+                logger.info("comment表创建成功");
             }
             else{
-                logger.info("url表已存在");
+                logger.info("comment表已存在");
             }
             rs = cn.getMetaData().getTables(null, null, "music", null);
-            //不存在user表
-            if(!rs.next()){
-                //创建user表
+            //不存在music表
+            if(!rs.next()) {
+                //创建music表
                 st.execute(p.getProperty("createMusicTable"));
                 logger.info("music表创建成功");
             }

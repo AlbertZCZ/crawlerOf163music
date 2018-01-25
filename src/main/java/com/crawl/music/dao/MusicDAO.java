@@ -28,7 +28,7 @@ public class MusicDAO {
             //不存在url表
             if(!rs.next()){
                 //创建url表
-                st.execute(p.getProperty("createUrlTable"));
+                st.execute(p.getProperty("createCommentTable"));
                 logger.info("url表创建成功");
             }
             else{
