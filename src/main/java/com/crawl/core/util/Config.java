@@ -98,7 +98,7 @@ public class Config {
             dbHost = p.getProperty("db.host");
             dbUsername = p.getProperty("db.username");
             dbPassword = p.getProperty("db.password");
-            createUrlTable = p.getProperty("createUrlTable");
+            createUrlTable = p.getProperty("createCommentTable");
             createUserTable = p.getProperty("createUserTable");
         }
     }
